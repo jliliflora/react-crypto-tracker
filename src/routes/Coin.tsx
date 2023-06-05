@@ -86,7 +86,7 @@ interface LocationState {
 }
 
 interface InfoData {
-  d: string;
+  id: string;
   name: string;
   symbol: string;
   rank: number;
