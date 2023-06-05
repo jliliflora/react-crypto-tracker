@@ -71,16 +71,24 @@ a {
 function App() {
   const [isDark, setIsDark] = useState(false);
   const toggleDark = () => setIsDark((current) => !current);
+  // App.tsx에서 toggleDark 함수가 Router로 보내고
+
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <button onClick={toggleDark}>Toggle Mode</button>
         <GlobalStyle />
-        <Router />
+        <Router toggleDark={toggleDark} />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>
     </>
   );
 }
+//Chart.js 완성시키면 다크모드 다시 만지기
+/* global state (다크모드 토글 정리)
+App (isDark, modifierFn)
+-> Router -> Coins(modifier)
+-> Router -> Coin -> Chart(isDark)
+ */
 
 export default App;

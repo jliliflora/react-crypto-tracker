@@ -4,7 +4,12 @@ import Coins from "./routes/Coins";
 import Chart from "./routes/Chart";
 import Price from "./routes/Price";
 
-function Router() {
+interface IRouterProps {
+  toggleDark: () => void;
+  //router가 funtion을 받도록 할건데, 여기는 toggleDrak라는 함수를 받고자 한다는 것을 말함
+}
+
+function Router({ toggleDark }: IRouterProps) {
   return (
     <BrowserRouter>
       <Routes>
@@ -12,10 +17,11 @@ function Router() {
           <Route path="chart" element={<Chart />} />
           <Route path="price" element={<Price />} />
         </Route>
-        <Route path="/" element={<Coins />} />
+        <Route path="/" element={<Coins toggleDark={toggleDark} />} />
       </Routes>
     </BrowserRouter>
   );
 }
+// 받은 toggleDark함수를 Router에서 Coins로 또 보내기!
 
 export default Router;

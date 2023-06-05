@@ -64,7 +64,12 @@ interface ICoin {
   type: string;
 }
 
-function Coins() {
+interface ICoinsProps {
+  toggleDark: () => void;
+}
+// 이제서야 Coins에서 toggleDark 함수를 가지게 된다
+
+function Coins({ toggleDark }: ICoinsProps) {
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   // QueryKey(고유식별자) => 여기서는 "allCoins"
   /*
@@ -85,6 +90,7 @@ function Coins() {
     <Container>
       <Header>
         <Title>COIN</Title>
+        <button onClick={toggleDark}>Toggle Dark Mode</button>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>
