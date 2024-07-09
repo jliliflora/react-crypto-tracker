@@ -73,7 +73,7 @@ interface ICoinsProps {
 
 function Coins() {
   const setDarkAtom = useSetRecoilState(isDarkAtom); //setter function은 value를 설정(set)하는 함수
-  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev); // 반대값을 리턴해줌으로써 true,false가 왔다갔다 할 수 있음
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   // QueryKey(고유식별자) => 여기서는 "allCoins"
 
