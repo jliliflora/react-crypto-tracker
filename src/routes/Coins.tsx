@@ -5,11 +5,13 @@ import styled from "styled-components";
 import { fetchCoins } from "./api";
 import { useSetRecoilState } from "recoil";
 import { isDarkAtom } from "../atom";
+import { useState } from "react";
 
 const Container = styled.div`
   padding: 0px 20px;
   max-width: 480px;
   margin: 0 auto;
+  border: 1px solid red;
 `;
 
 const Header = styled.header`
@@ -17,9 +19,19 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid gray;
 `;
 
-const CoinsList = styled.ul``;
+const Toggle = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  border: 1px solid blue;
+`;
+
+const CoinsList = styled.ul`
+  border: 1px solid yellow;
+`;
 
 const Coin = styled.li`
   background-color: ${(props) => props.theme.cardBgColor};
@@ -42,6 +54,7 @@ const Coin = styled.li`
 
 const Title = styled.h1`
   font-size: 48px;
+  font-weight: 800;
   color: ${(props) => props.theme.accentColor};
 `;
 
@@ -56,6 +69,26 @@ const Img = styled.img`
   margin-right: 10px;
 `;
 
+const ToggleTest = styled.div`
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border: 1px solid pink;
+`;
+
+const Checkbox = styled.input`
+  display: none; /* 기본 체크박스 숨기기 */
+`;
+
+const Label = styled.label<LabelProps>`
+  cursor: pointer;
+  color: ${(props) => (props.checked ? "green" : "white")};
+`;
+
+const Content = styled.div`
+  margin-left: 10px;
+`;
+
 interface ICoin {
   id: string;
   name: string;
@@ -64,6 +97,10 @@ interface ICoin {
   is_new: boolean;
   is_active: boolean;
   type: string;
+}
+
+interface LabelProps {
+  checked: boolean;
 }
 
 interface ICoinsProps {
@@ -76,6 +113,12 @@ function Coins() {
   const toggleDarkAtom = () => setDarkAtom((prev) => !prev); // 반대값을 리턴해줌으로써 true,false가 왔다갔다 할 수 있음
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   // QueryKey(고유식별자) => 여기서는 "allCoins"
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   /*
   const [coins, setCoins] = useState<CoinInterface[]>([]);
@@ -93,9 +136,24 @@ function Coins() {
 
   return (
     <Container>
+      <Toggle>
+        <button onClick={toggleDarkAtom}>Toggle Mode</button>
+        <ToggleTest>
+          <Checkbox
+            type="checkbox"
+            id="toggle"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+            onClick={toggleDarkAtom}
+          />
+          <Label htmlFor="toggle" checked={isChecked}>
+            Toggle
+          </Label>
+          {/* <Content checked={isChecked}>This is some content.</Content> */}
+        </ToggleTest>
+      </Toggle>
       <Header>
         <Title>COIN</Title>
-        <button onClick={toggleDarkAtom}>Toggle Mode</button>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>
@@ -105,7 +163,8 @@ function Coins() {
             <Coin key={coin.id}>
               <Link to={`/${coin.id}`} state={{ name: coin.name }}>
                 <Img
-                  src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
+                  // src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
+                  src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
                 />
                 {coin.name} &rarr;
               </Link>
