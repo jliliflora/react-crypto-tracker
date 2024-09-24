@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useMatch } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinTrackers } from "./api";
+import Switch from "../components/Switch";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -186,6 +187,7 @@ function Coin() {
   const loading = infoLoading || tickersLoading;
   return (
     <Container>
+      <Switch />
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
