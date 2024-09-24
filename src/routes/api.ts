@@ -8,8 +8,8 @@ export function fetchCoinInfo(coinId: string | undefined) {
     response.json()
   );
 }
-export function fetchCoinTrackers(coinId: string | undefined) {
-  return fetch(`${BASE_URL}/trackers/${coinId}`).then((response) =>
+export function fetchCoinTickers(coinId: string | undefined) {
+  return fetch(`${BASE_URL}/tickers/${coinId}`).then((response) =>
     response.json()
   );
 }

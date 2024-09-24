@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useMatch } from "react-router-dom";
 import { useQuery } from "react-query";
-import { fetchCoinInfo, fetchCoinTrackers } from "./api";
+import { fetchCoinInfo, fetchCoinTickers } from "./api";
 import Toggle from "../components/Toggle";
 
 const Container = styled.div`
@@ -43,6 +43,7 @@ const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 33%;
   span:first-child {
     font-size: 10px;
     font-weight: 400;
@@ -157,7 +158,7 @@ function Coin() {
   );
   const { isLoading: tickersLoading, data: tickersData } = useQuery<PriceData>(
     ["tickers", coinId],
-    () => fetchCoinTrackers(coinId)
+    () => fetchCoinTickers(coinId)
   );
   // const [loading, setLoading] = useState(true);
   // const [info, setInfo] = useState<InfoData>();
