@@ -61,7 +61,7 @@ const SwitchBtn = styled.span`
   }
 `;
 
-function Switch() {
+function Toggle() {
   const setDarkAtom = useSetRecoilState(isDarkAtom); //setter function은 value를 설정(set)하는 함수
   const toggleDarkAtom = () => setDarkAtom((prev) => !prev); // 반대값을 리턴해줌으로써 true,false가 왔다갔다 할 수 있음
 
@@ -75,4 +75,4 @@ function Switch() {
   );
 }
 
-export default Switch;
+export default Toggle;

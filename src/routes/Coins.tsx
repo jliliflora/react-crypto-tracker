@@ -6,13 +6,13 @@ import { fetchCoins } from "./api";
 import { useSetRecoilState } from "recoil";
 import { isDarkAtom } from "../atom";
 import { useState } from "react";
-import Switch from "../components/Switch";
+import Toggle from "../components/Toggle";
 
 const Container = styled.div`
   padding: 0px 20px;
   max-width: 480px;
   margin: 0 auto;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
 const Header = styled.header`
@@ -20,18 +20,18 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
 `;
 
-const Toggle = styled.div`
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  border: 1px solid blue;
-`;
+// const Toggle = styled.div`
+//   position: fixed;
+//   top: 20px;
+//   left: 20px;
+//   /* border: 1px solid blue; */
+// `;
 
 const CoinsList = styled.ul`
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
 `;
 
 const Coin = styled.li`
@@ -115,7 +115,7 @@ function Coins() {
         <button onClick={toggleDarkAtom}>Toggle Mode</button>
       </Toggle> */}
 
-      <Switch />
+      <Toggle />
       {/* 
       <Wrapper>
         <SwitchInput type="checkbox" id="switch" onClick={toggleDarkAtom} />
