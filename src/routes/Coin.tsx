@@ -49,33 +49,38 @@ const OverviewItem = styled.div`
   align-items: center;
   width: 33%;
   span:first-child {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 400;
     text-transform: uppercase;
     margin-bottom: 5px;
+    color: #a5a5a5;
   }
 `;
 const Description = styled.p`
-  margin: 20px 5px;
+  margin: 3vh 5px;
   line-height: 1.25rem;
 `;
 
 const Tabs = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  margin: 25px 0px;
-  gap: 10px;
+  margin: 25px 5px;
+  gap: 50px;
 `;
 
 const Tab = styled.span<{ isActive: boolean }>`
   text-align: center;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
-  background-color: ${(props) => props.theme.overviewBgColor};
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.12);
-  padding: 7px 0px;
-  border-radius: 10px;
+  padding: 1vh 0px;
+  // border-radius: 10px;
+  // background-color: ${(props) => props.theme.overviewBgColor};
+  // box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid
+    ${(props) =>
+      props.isActive ? props.theme.accentColor : props.theme.textColor};
+
   color: ${(props) =>
     props.isActive ? props.theme.accentColor : props.theme.textColor};
   a {
@@ -224,8 +229,8 @@ function Coin() {
             aria-hidden="true"
           >
             <path
-              clip-rule="evenodd"
-              fill-rule="evenodd"
+              clipRule="evenodd"
+              fillRule="evenodd"
               d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
             ></path>
           </svg>
@@ -240,36 +245,36 @@ function Coin() {
         <>
           <Overview>
             <OverviewItem>
-              <span>Rank:</span>
+              <span>순위</span>
               <span>{infoData?.rank}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Symbol:</span>
+              <span>티커</span>
               <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Price:</span>
-              <span>${tickersData?.quotes.USD.price.toFixed(5)}</span>
+              <span>현재가</span>
+              <span>${tickersData?.quotes.USD.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
           <Overview>
             <OverviewItem>
-              <span>Total Suply:</span>
+              <span>총량</span>
               <span>{tickersData?.total_supply}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Max Supply:</span>
+              <span>최대 발행량</span>
               <span>{tickersData?.max_supply}</span>
             </OverviewItem>
           </Overview>
 
           <Tabs>
-            <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>Chart</Link>
-            </Tab>
             <Tab isActive={priceMatch !== null}>
               <Link to={`/${coinId}/price`}>Price</Link>
+            </Tab>
+            <Tab isActive={chartMatch !== null}>
+              <Link to={`/${coinId}/chart`}>Chart</Link>
             </Tab>
           </Tabs>
 

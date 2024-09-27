@@ -29,7 +29,7 @@ function Chart() {
   // console.log(params);
 
   const { coinId } = useOutletContext<ICoinId>();
-  console.log(coinId);
+  // console.log("chart", coinId);
   const { isLoading, data } = useQuery<IHistorical[]>(["ohlcv", coinId], () =>
     fetchCoinHistory(coinId)
   );
