@@ -4,8 +4,8 @@ import { isDarkAtom } from "../atom";
 
 const Wrapper = styled.div`
   position: fixed;
-  top: 20px;
-  left: 20px;
+  bottom: 25px;
+  right: 25px;
   /* border: 1px solid red; */
 `;
 
@@ -24,39 +24,40 @@ const SwitchLabel = styled.label`
   display: inline-block;
   width: 58px;
   height: 28px;
-  background: #22262b;
-  border: 2px solid #9c88ff;
+  background: ${(props) => props.theme.toggleBgColor};
+  border: 2px solid ${(props) => props.theme.toggleBorder};
   border-radius: 20px;
   transition: 0.2s;
 
   &:hover {
-    background: #efefef;
+    background: ${(props) => props.theme.toggleHover};
   }
 
   ${SwitchInput}:checked + & {
-    background: #6750d5;
-    border: 2px solid #6750d5;
+    background: ${(props) => props.theme.toggleBgColor};
+    border: 2px solid ${(props) => props.theme.toggleBorder};
 
     &:hover {
-      background: #9c88ff;
+      background: ${(props) => props.theme.toggleHover};
     }
   }
 `;
 
+/* */
 const SwitchBtn = styled.span`
   position: absolute;
   top: 2px;
-  left: 3px;
+  left: ${(props) => props.theme.toggleBtnLeft}px;
   display: inline-block;
   width: 20px;
   height: 20px;
   border-radius: 20px;
-  background: #9c88ff;
+  background: ${(props) => props.theme.toggleBtnColor};
   transition: 0.2s;
 
   ${SwitchInput}:checked + ${SwitchLabel} & {
-    left: 32px;
-    background: #fff;
+    left: ${(props) => props.theme.toggleBtnLeft}px;
+    background: ${(props) => props.theme.toggleBtnColor};
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.12);
   }
 `;

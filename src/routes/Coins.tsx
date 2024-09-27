@@ -1,12 +1,12 @@
 // import { useEffect, useState } from "react";
+// import { useSetRecoilState } from "recoil";
+// import { isDarkAtom } from "../atom";
+// import { useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "./api";
-import { useSetRecoilState } from "recoil";
-import { isDarkAtom } from "../atom";
-import { useState } from "react";
-import Toggle from "../components/Toggle";
+import { Helmet } from "react-helmet";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -16,19 +16,12 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  height: 10vh;
+  height: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
   /* border: 1px solid gray; */
 `;
-
-// const Toggle = styled.div`
-//   position: fixed;
-//   top: 20px;
-//   left: 20px;
-//   /* border: 1px solid blue; */
-// `;
 
 const CoinsList = styled.ul`
   /* border: 1px solid yellow; */
@@ -36,6 +29,7 @@ const CoinsList = styled.ul`
 
 const Coin = styled.li`
   background-color: ${(props) => props.theme.cardBgColor};
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.12);
   color: ${(props) => props.theme.textColor};
   border-radius: 10px;
   margin-bottom: 10px;
@@ -55,7 +49,7 @@ const Coin = styled.li`
 
 const Title = styled.h1`
   font-size: 48px;
-  font-weight: 800;
+  font-weight: bold;
   color: ${(props) => props.theme.accentColor};
 `;
 
@@ -111,19 +105,12 @@ function Coins() {
 
   return (
     <Container>
+      <Helmet>
+        <title>COIN</title>
+      </Helmet>
       {/* <Toggle>
         <button onClick={toggleDarkAtom}>Toggle Mode</button>
       </Toggle> */}
-
-      <Toggle />
-      {/* 
-      <Wrapper>
-        <SwitchInput type="checkbox" id="switch" onClick={toggleDarkAtom} />
-        <SwitchLabel htmlFor="switch">
-          <OnfBtn />
-        </SwitchLabel>
-      </Wrapper> 
-      */}
 
       <Header>
         <Title>COIN</Title>

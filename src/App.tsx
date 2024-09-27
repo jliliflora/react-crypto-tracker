@@ -5,10 +5,15 @@ import { darkTheme, lightTheme } from "./theme";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "./atom";
+import Toggle from "./components/Toggle";
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
-
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -38,9 +43,6 @@ footer, header, hgroup, main, menu, nav, section {
 *[hidden] {
     display: none;
 }
-body {
-  line-height: 1;
-}
 menu, ol, ul {
   list-style: none;
 }
@@ -60,7 +62,9 @@ table {
   box-sizing: border-box;
 }
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  line-height: 1;
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-weight: 100;
   background-color: ${(props) => props.theme.bgColor};
   color:${(props) => props.theme.textColor};
 }
@@ -81,6 +85,7 @@ function App() {
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
+        <Toggle />
         <Router />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>

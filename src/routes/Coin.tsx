@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 import { useMatch } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinTickers } from "./api";
-import Toggle from "../components/Toggle";
+import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -16,7 +17,8 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  height: 10vh;
+  position: relative;
+  height: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,6 +26,7 @@ const Header = styled.header`
 
 const Title = styled.h1`
   font-size: 48px;
+  font-weight: bold;
   color: ${(props) => props.theme.accentColor};
 `;
 
@@ -35,8 +38,9 @@ const Loader = styled.span`
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px 20px;
+  background-color: ${(props) => props.theme.overviewBgColor};
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.12);
+  padding: 25px 40px;
   border-radius: 10px;
 `;
 const OverviewItem = styled.div`
@@ -52,7 +56,8 @@ const OverviewItem = styled.div`
   }
 `;
 const Description = styled.p`
-  margin: 20px 0px;
+  margin: 20px 5px;
+  line-height: 1.25rem;
 `;
 
 const Tabs = styled.div`
@@ -67,7 +72,8 @@ const Tab = styled.span<{ isActive: boolean }>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.overviewBgColor};
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.12);
   padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) =>
@@ -75,6 +81,17 @@ const Tab = styled.span<{ isActive: boolean }>`
   a {
     display: block;
   }
+`;
+
+const BackBtn = styled.div`
+  position: absolute;
+  left: 0px;
+  width: 35px;
+  height: 35px;
+  border: 2px solid #9c88ff;
+  background: transparent;
+  border-radius: 35px;
+  cursor: pointer;
 `;
 
 interface RouterParams {
@@ -86,7 +103,6 @@ interface LocationState {
     rank: number;
   };
 }
-
 interface InfoData {
   id: string;
   name: string;
@@ -185,11 +201,35 @@ function Coin() {
     })();
   }, [coinId]); */
 
+  const navigate = useNavigate();
+  const onClickBack = () => {
+    navigate("/"); // 바로 이전 페이지로 이동, '/main' 등 직접 지정도 당연히 가능
+  };
+
   const loading = infoLoading || tickersLoading;
   return (
     <Container>
-      <Toggle />
+      <Helmet>
+        <title>
+          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+        </title>
+      </Helmet>
       <Header>
+        <BackBtn onClick={onClickBack}>
+          <svg
+            data-slot="icon"
+            fill="#9c88ff"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              clip-rule="evenodd"
+              fill-rule="evenodd"
+              d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
+            ></path>
+          </svg>
+        </BackBtn>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
@@ -208,8 +248,8 @@ function Coin() {
               <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{infoData?.open_source ? "Yes" : "No"}</span>
+              <span>Price:</span>
+              <span>${tickersData?.quotes.USD.price.toFixed(5)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
