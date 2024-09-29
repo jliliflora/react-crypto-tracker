@@ -3,12 +3,10 @@ import { useOutletContext } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinTickers } from "./api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowTrendUp } from "@fortawesome/free-solid-svg-icons";
-
-const Title = styled.h1`
-  font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
-`;
+import {
+  faArrowTrendDown,
+  faArrowTrendUp,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Overview = styled.div`
   display: grid;
@@ -67,9 +65,6 @@ const PercentChange = styled.div`
   justify-content: space-between;
   font-size: 1.9rem;
   font-weight: 300;
-  div:first-child {
-    color: #ffffff;
-  }
 `;
 
 interface ICoinId {
@@ -118,6 +113,7 @@ function Price() {
   const { isLoading, data } = useQuery<PriceData>(["tickers", coinId], () =>
     fetchCoinTickers(coinId)
   );
+  const ChangeData = data?.quotes.USD;
 
   return (
     <>
@@ -139,7 +135,11 @@ function Price() {
             <PercentChange>
               <div>{data?.quotes.USD.percent_change_1h}%</div>
               <div>
-                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                {(data?.quotes?.USD?.percent_change_1h ?? 0) > 0 ? (
+                  <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                ) : (
+                  <FontAwesomeIcon icon={faArrowTrendDown} color="Limegreen" />
+                )}
               </div>
             </PercentChange>
           </OverviewItemHalf>
@@ -148,7 +148,11 @@ function Price() {
             <PercentChange>
               <div>{data?.quotes.USD.percent_change_6h}%</div>
               <div>
-                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                {(data?.quotes?.USD?.percent_change_6h ?? 0) > 0 ? (
+                  <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                ) : (
+                  <FontAwesomeIcon icon={faArrowTrendDown} color="Limegreen" />
+                )}
               </div>
             </PercentChange>
           </OverviewItemHalf>
@@ -157,7 +161,11 @@ function Price() {
             <PercentChange>
               <div>{data?.quotes.USD.percent_change_12h}%</div>
               <div>
-                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                {(data?.quotes?.USD?.percent_change_12h ?? 0) > 0 ? (
+                  <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                ) : (
+                  <FontAwesomeIcon icon={faArrowTrendDown} color="Limegreen" />
+                )}
               </div>
             </PercentChange>
           </OverviewItemHalf>
@@ -166,7 +174,11 @@ function Price() {
             <PercentChange>
               <div>{data?.quotes.USD.percent_change_24h}%</div>
               <div>
-                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                {(data?.quotes?.USD?.percent_change_24h ?? 0) > 0 ? (
+                  <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                ) : (
+                  <FontAwesomeIcon icon={faArrowTrendDown} color="Limegreen" />
+                )}
               </div>
             </PercentChange>
           </OverviewItemHalf>
@@ -175,7 +187,11 @@ function Price() {
             <PercentChange>
               <div>{data?.quotes.USD.percent_change_7d}%</div>
               <div>
-                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                {(data?.quotes?.USD?.percent_change_7d ?? 0) > 0 ? (
+                  <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                ) : (
+                  <FontAwesomeIcon icon={faArrowTrendDown} color="Limegreen" />
+                )}
               </div>
             </PercentChange>
           </OverviewItemHalf>
@@ -184,7 +200,11 @@ function Price() {
             <PercentChange>
               <div>{data?.quotes.USD.percent_change_30d}%</div>
               <div>
-                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                {(data?.quotes?.USD?.percent_change_30d ?? 0) > 0 ? (
+                  <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+                ) : (
+                  <FontAwesomeIcon icon={faArrowTrendDown} color="Limegreen" />
+                )}
               </div>
             </PercentChange>
           </OverviewItemHalf>
