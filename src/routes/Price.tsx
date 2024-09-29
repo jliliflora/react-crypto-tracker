@@ -51,6 +51,27 @@ const OverviewItemHalf = styled.div`
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.12);
 `;
 
+const OverviewItemHalfTitle = styled.div`
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #a5a5a5;
+`;
+
+const PercentChange = styled.div`
+  display: flex;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  font-size: 1.9rem;
+  font-weight: 300;
+  div:first-child {
+    color: #ffffff;
+  }
+`;
+
 interface ICoinId {
   coinId: string;
 }
@@ -114,15 +135,59 @@ function Price() {
             <div>${data?.quotes.USD.ath_price.toFixed(3)}</div>
           </OverviewItem>
           <OverviewItemHalf>
-            <div>
-              <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
-            </div>
+            <OverviewItemHalfTitle>1시간 전보다</OverviewItemHalfTitle>
+            <PercentChange>
+              <div>{data?.quotes.USD.percent_change_1h}%</div>
+              <div>
+                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+              </div>
+            </PercentChange>
           </OverviewItemHalf>
-          <OverviewItemHalf>3</OverviewItemHalf>
-          <OverviewItemHalf>4</OverviewItemHalf>
-          <OverviewItemHalf>5</OverviewItemHalf>
-          <OverviewItemHalf>6</OverviewItemHalf>
-          <OverviewItemHalf>6</OverviewItemHalf>
+          <OverviewItemHalf>
+            <OverviewItemHalfTitle>6시간 전보다</OverviewItemHalfTitle>
+            <PercentChange>
+              <div>{data?.quotes.USD.percent_change_6h}%</div>
+              <div>
+                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+              </div>
+            </PercentChange>
+          </OverviewItemHalf>
+          <OverviewItemHalf>
+            <OverviewItemHalfTitle>12시간 전보다</OverviewItemHalfTitle>
+            <PercentChange>
+              <div>{data?.quotes.USD.percent_change_12h}%</div>
+              <div>
+                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+              </div>
+            </PercentChange>
+          </OverviewItemHalf>
+          <OverviewItemHalf>
+            <OverviewItemHalfTitle>24시간 전보다</OverviewItemHalfTitle>
+            <PercentChange>
+              <div>{data?.quotes.USD.percent_change_24h}%</div>
+              <div>
+                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+              </div>
+            </PercentChange>
+          </OverviewItemHalf>
+          <OverviewItemHalf>
+            <OverviewItemHalfTitle>7일 전보다</OverviewItemHalfTitle>
+            <PercentChange>
+              <div>{data?.quotes.USD.percent_change_7d}%</div>
+              <div>
+                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+              </div>
+            </PercentChange>
+          </OverviewItemHalf>
+          <OverviewItemHalf>
+            <OverviewItemHalfTitle>30일 전보다</OverviewItemHalfTitle>
+            <PercentChange>
+              <div>{data?.quotes.USD.percent_change_30d}%</div>
+              <div>
+                <FontAwesomeIcon icon={faArrowTrendUp} color="red" />
+              </div>
+            </PercentChange>
+          </OverviewItemHalf>
         </Overview>
       )}
     </>
