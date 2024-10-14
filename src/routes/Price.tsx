@@ -13,6 +13,7 @@ const Overview = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 6rem;
   gap: 1rem;
+  margin-bottom: 30px;
 `;
 
 const OverviewItem = styled.div`

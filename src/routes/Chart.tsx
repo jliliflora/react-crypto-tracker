@@ -58,6 +58,15 @@ function Chart() {
                 show: false,
               },
               background: "transparent",
+              animations: {
+                enabled: true,
+                easing: "easeout",
+                speed: 1500,
+                animateGradually: {
+                  enabled: true,
+                  delay: 0,
+                },
+              },
             },
             grid: { show: false },
             stroke: {
